@@ -46,3 +46,32 @@
     Function `size` is defined with `get` keyword this will automatically invoked when member of object is accessed as we have used `s.size` instead of `s.size()`.
     <br/>
     JavaScript has already Set class above was just for the demonstration we will be using predefined Set class to extend and demonstrate `extends` keyword
+    ```
+      class MySet extends Set {
+          constructor(arr){
+              super(arr);
+              this.originalArray = arr;
+          }
+      
+          add(val){
+              super.add(val);
+              console.log(`added ${val} to the set!`);
+          }
+          toArray() {
+              return Array.from(this);
+          }
+          reset(){
+              return new MySet(this.originalArray)
+          }
+      }
+      
+      const s = new MySet([1,2,3,4,5]);
+      console.log(s.toArray());
+      s.add(6);
+      console.log(s.toArray());
+      s.add(7);
+      console.log(s.toArray());
+      console.log(s.reset().toArray());
+    ```
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/5edd0b8d-81ba-402b-800f-747c43fb2c01) <br />
+    In above example predefined class `Set` is Extended to MySet and `super()` are used to invoke methods of parent class.
