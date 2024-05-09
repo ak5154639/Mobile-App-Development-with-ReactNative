@@ -1,4 +1,4 @@
-# ES6 JavaScript
+![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/89930819-ade2-4d89-afad-e609339885ff)# ES6 JavaScript
 ## ES5, ES6, ES2016, ES2017, ES.Next
   - ECMAScript vs JavaScript
     ECMAScript is basically the spec for this language ECMAScript defines the syntax, semantics, and behavior of the JavaScript language. <br/>
@@ -436,8 +436,85 @@
      ```
      ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/318e3be1-1760-4a42-97de-6bfb7cc46558) <br />
      Promises simplify the chaining of asynchronous operations and eliminate the problem of "callback hell" (deeply nested callbacks), making the code easier to understand and maintain. <br />
-     Callbacks are more straightforward and suitable for simple asynchronous tasks, Promises offer improved readability, error handling, and ease of use for more complex asynchronous workflows. However, it's important to note that with the introduction of async/await in modern JavaScript, Promises have become even more convenient and powerful for handling asynchronous code.
+     Callbacks are more straightforward and suitable for simple asynchronous tasks, Promises offer improved readability, error handling, and ease of use for more complex asynchronous workflows. However, it's important to note that with the **introduction of async/await in modern JavaScript**, Promises have become even more convenient and powerful for handling asynchronous code.
 
 ## Async Await
   - Introduced in ES2017
   - Allows people to write async code as if it were synchronous
+    ```
+      async function fetchData() {
+          try {
+              let data = await fetch('https://dummyjson.com/products?limit=3');
+              let data2 = await data.json()
+              console.log(data2);
+          } catch (error) {
+              console.error(error);
+          }
+      }
+      
+      fetchData();
+    ```
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/aaa5c9ae-ee9d-4b1b-8c5a-653bbad23605)
+
+## this
+  - Refers to an object that's set at the creation of a new execution context (function invocation)
+  - In the global execution context, refers to global object
+    | In Node Environment | In Browser Environment |
+    |---------------------|------------------------|
+    |![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/51a562f5-3129-4cbc-bf9b-186711cb6b0a) | ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/6b8c7385-44af-455b-9d53-a7c61149244b) |
+  - If the function is called as a method of an object, `this` is bound to the object the method is called on
+    ```
+      const person = {
+          name: "Aniket",
+          greet: function() {console.log("hello, ", this.name)}
+      }
+      
+      person.greet();
+      
+      const friend = {
+          name: "Samar"
+      }
+      
+      friend.greet = person.greet
+      friend.greet()
+      
+      const greet = person.greet
+      greet();
+    ```
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/147735fe-ea80-4b94-b938-49935d397658) <br />
+    Here for last `greet()` function returns undefined becuse `this` refers to the object.
+## Setting `this` manually
+  - `bind()`, `call()`, `apply()`
+    ```
+      const person = {
+          name: "Aniket",
+          greet: function() {console.log("hello, ", this.name)}
+      }
+      
+      
+      const greet = person.greet.bind({name: "this is a bound object"})
+      person.greet.call({name:"this is bound object 2"})
+      person.greet.apply({name: "this is a bound object 3"})
+      greet();
+    ```
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/07c8ee75-2bc6-4156-bd14-e0affa89e3f7) <br />
+    Here `bind()` returns a new function with given object in arguement, `call()` and `apply()` just immediately involes that.
+  - ES6 arrow notation
+    ```
+      const person = {
+          name: "Aniket",
+          greet: () => {console.log("hi, ", this.name)},
+      }
+      
+      person.greet();
+    ```
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/99831cb7-c54e-4310-88a6-a09ce1b01f72) <br />
+    ES6 the arrow notation binds `this` to the whatever the value at the time of writing.
+
+## Browser and the DOM
+  - Browsers render HTML to a webpage
+  - HTML defines a tree-like structure
+  - Browsers construct this tree in memory before painting the page
+  - Tree is called the Document Object Model
+  - The DOM can be modified using JavaScript
+
