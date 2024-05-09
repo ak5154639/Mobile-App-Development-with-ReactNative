@@ -176,5 +176,62 @@
 ## Synchromous? Async? Single-Threaded?
   - JavaScript is a single-threaded, synchronous language
   - A function that takes a long time to run will cause a page to become unresponsive
-  - JavaScript has functions that act asynchronously
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/9c346d35-b5be-41a2-bbf2-0f4697e087ec)
+    This will hang out webpage for 10 seconds, We can't do anything else on that webpage
+
+  - JavaScript has functions that act asynchronously <a id="asyncExample"></a>
+    ```
+    function printOne(){
+        console.log("one");
+    }
+    
+    function printTwo(){
+        console.log("two");
+    }
+    
+    function printThree(){
+        console.log("three");
+    }
+    
+    
+    setTimeout(printOne, 1000);
+    setTimeout(printTwo, 0);
+    printThree();
+    ```
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/48a9c680-4bdc-461c-8a1a-c96c1267fa9b) <br />
+    We can see that `printTree()` executed first even after `printTwo()` has timeout 0, bucause `setTimeout()` is asynchronous function and printTree is asynchronous functions and `printThree()` will get into the execution from stack later.
+
   - But how can it be both synchronous and asynchronous?
+
+## Asynchronous JavaScript
+  ### Execution stack
+  - Functions invoked by other functions get added to the call stack
+  - When functions complete, they are removed from the stack and the frame below continues executing
+  - Browser APIs
+  - Function queue
+  - Event loop
+    ```
+    function addOne(number){
+        throw new Error("Oh no here we got an error!")
+    }
+    
+    function getNum() {
+        return addOne(10);
+    }
+    
+    function c(){
+        console.log(getNum() + getNum());
+    }
+    
+    c()
+    ```
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/81dd22d7-f3d9-4859-8a89-974e6c3df163) <br />
+    We can see error raised and how the functions were stacked
+    
+### How Asynchronous JavaScript works
+  ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/49c47c9e-fcd4-426c-990b-0bc1f860f0f2)
+  - Execution stack have current executing function [refer this examle](#asyncExample)
+  - Browser API have APIs handled by browser any anync function is API sent to Browser API and Browser will send it back to function queue when ready
+  - Function Queue is queue of ready functions to be excuted
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/11ea434f-c513-45cc-80e9-a9e073d9b664)
+  - Firstly `setTimeout(printOne,1s)` and  `setTimeout(printTwo,0s)` will be sent to the Browser API and then `printThree()` will be executed, at the same time this browser API will send `printTwo()` function in the function queue as 0 seconds elapsed and to be excuted but it will wait for the already present function in execution stack `printThree()` executed successfully then it will go to execution stack.
