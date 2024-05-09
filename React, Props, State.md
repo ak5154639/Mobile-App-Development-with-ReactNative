@@ -131,3 +131,106 @@
           )
       }
     ```
+
+## React is Declarative
+  - Imperative vs Declarative
+  - The browser APIs aren't fun to work with
+  - React allows us to write what we want, and the library will take care of the DOM manipulation
+    Below is imperating Programming of creating Slide using JavaScript
+    ```
+      const SLIDE = {
+          title: 'React is Declarative',
+          bullets: [
+              'Imperative vs Declarative',
+              'The browser APIs aren\'t fun to work with',
+              'React allows us to write what we want, and the library will take care of the DOM manipulation', 
+          ],
+      }
+      
+      function createSlide(slide){
+          const slideElement = document.createElement('div');
+      
+          // TODO: add to slide
+          const title = document.createElement('h1');
+          title.innerHTML = SLIDE.title;
+          slideElement.appendChild(title);
+      
+          const list = createElement('ul');
+          slide.bullets.map(bullet=>{
+              const item = createElement('li');
+              item.innerHTML = bullet;
+              list.appendChild(item);
+          })
+          slideElement.appendChild(list);
+      
+      
+          return slideElement
+      }
+    ```
+    Below is Declarative Programming of creating Slide using React
+    ```
+      const SLIDE = {
+          title: 'React is Declarative',
+          bullets: [
+              'Imperative vs Declarative',
+              'The browser APIs aren\'t fun to work with',
+              'React allows us to write what we want, and the library will take care of the DOM manipulation', 
+          ],
+      }
+      
+      function createSlide(slide){
+          return (
+              <div>
+                  <h1>{slide.title}</h1>
+                  <ul>
+                      {slide.bullets.map(bullet=><li>{bullet}</li>)}
+                  </ul>
+              </div>
+          )
+      }
+    ```
+
+## React is Easily Componentized
+  - Breaking acomplex problem into discreate components
+  - Can reuse these components
+    - Consistency
+    - Iteration speed
+  - React's declarative nature makes it easy to customize components
+
+## React is Performant
+  - We write what we want and React will do the hard work
+  - Reconciliation - the process by which React syncs changes in app state to the DOM
+    - Reconstructs the virtual DOM
+    - Diffs the virtual DOM against the DOM
+    - Only makes the changes needed
+
+## Writin React
+  - JSX
+    - XML-like syntax extension of JavaScript
+    - Transpiles to JavaScript
+    - Lowercase tags are treated as HTML/SVG tags, uppercase are treated as custom components
+  - Components are just functions
+    - Returns a node(something React can render, e.g. a <div />)
+    - Receives an object of the properties that are passes to the element
+
+## Props
+  - Passes as an object to a component and used to compute ther returned node
+  - Changes in these props will cause a recomputation of the returned node ("render")
+  - Unlike in HTML, these can be an JS value
+
+## State
+  - Adds internally-manages configuration for a component
+  - `this.state` is a class property on the component instance
+  - Can only be updated by invoking `this.setState()`
+    - Implemented in React.Component
+    - `setState()` calls are batched and run asynchronously
+    - Pass an object to be merged, or a function of previos state
+  - Changes in state also cause re-renders
+
+> But why limit React to just web?
+
+## React Native
+  - A framework that relies on React core
+  - Allows us build mobile apps usinf only JavaScript
+    - "Learn once, write anywhere"
+  - Supports iOS and Android
