@@ -235,3 +235,209 @@
   - Function Queue is queue of ready functions to be excuted
     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/11ea434f-c513-45cc-80e9-a9e073d9b664)
   - Firstly `setTimeout(printOne,1s)` and  `setTimeout(printTwo,0s)` will be sent to the Browser API and then `printThree()` will be executed, at the same time this browser API will send `printTwo()` function in the function queue as 0 seconds elapsed and to be excuted but it will wait for the already present function in execution stack `printThree()` executed successfully then it will go to execution stack.
+  ### Aynchronous functions
+  - setTimeout()
+  - XMLHttpRequest(), jQuery.ajax(), fetch()
+  - Database calls
+## Callbacks
+  - Control flow with asynchronous calls
+  - Execute function once asynchronous call returns value
+    - Program doesn't have to halt and wait for value
+  1. Simple Callback Example:
+     ```
+      function greet(name, callback) {
+          console.log("Hello, " + name + "!");
+          callback(); // Call the callback function
+      }
+      
+      function sayGoodbye() {
+          console.log("Goodbye!");
+      }
+      
+      greet("Aniket", sayGoodbye);
+     ```
+     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/46151ecf-032b-4fcf-8b9d-3e995ebbaaaa)
+
+  2. Asynchronous callback Example(setTimeout):
+       ```
+      console.log("Start");
+      setTimeout(function() {
+          console.log("Timeout done!");
+      }, 2000); // Execute the callback after 2000 milliseconds (2 seconds)
+      console.log("End");
+       ```
+     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/8d85183a-e5b9-4ae4-a583-e8b6c76e8d8b)
+
+  3. Callback with parameters:
+       ```
+      function add(a, b, callback) {
+          let result = a + b;
+          callback(result);
+      }
+      
+      function displayResult(result) {
+          console.log("The result is: " + result);
+      }
+      
+      add(5, 3, displayResult);
+       ```
+     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/9dac4a47-9eb4-4588-8873-43b2f67fa361)
+
+## Promises
+  - Alleviate "callback hell"
+  - Allows you to write code that assumes a value is returned within a success function
+  - Only needs a single error handler
+  1. Basic Promise Example
+     ```
+      let myPromise = new Promise(function(resolve, reject) {
+          // Asynchronous operation (e.g., fetching data from a server)
+          setTimeout(function() {
+              let data = "Hello, world!";
+              resolve(data); // Resolve the promise with the data
+          }, 2000);
+      });
+      
+      myPromise.then(function(data) {
+          console.log(data); // Output: Hello, world!
+      }).catch(function(error) {
+          console.error(error);
+      });
+     ```
+  2. Chaining Promises
+     ```
+      function getData() {
+          return new Promise(function(resolve, reject) {
+              // Asynchronous operation
+              setTimeout(function() {
+                  let data = "Hello, world!";
+                  resolve(data);
+              }, 2000);
+          });
+      }
+      
+      getData().then(function(data) {
+          console.log(data); // Output: Hello, world!
+          return "Another Promise";
+      }).then(function(data) {
+          console.log(data); // Output: Another Promise
+      }).catch(function(error) {
+          console.error(error);
+      });
+     ```
+  ### Callbacks vs Promises
+  1. Readability
+     ```
+      // Callback Example
+      function fetchData(callback) {
+          setTimeout(function() {
+              callback("Data received");
+          }, 2000);
+      }
+      
+      fetchData(function(data) {
+          console.log(data); // Output: Data received
+      });
+     ```
+     ```
+      // Promise Example
+      function fetchData() {
+          return new Promise(function(resolve) {
+              setTimeout(function() {
+                  resolve("Data received");
+              }, 2000);
+          });
+      }
+      
+      fetchData().then(function(data) {
+          console.log(data); // Output: Data received
+      });
+     ```
+     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/2bc40e72-e7bb-495d-9b35-edf724338b9d) <br />
+     Promises often result in cleaner and more readable code compared to nested callbacks, especially when dealing with multiple asynchronous operations or error handling.
+     
+  2. Error handling
+     ```
+      // Callback Example
+      function fetchData(callback) {
+          setTimeout(function() {
+              if (Math.random() < 0.5) {
+                  callback(null, "Data received");
+              } else {
+                  callback(new Error("Failed to fetch data"));
+              }
+          }, 2000);
+      }
+      
+      fetchData(function(err, data) {
+          if (err) {
+              console.error(err);
+          } else {
+              console.log(data);
+          }
+      });
+     ```
+     ```
+      // Promise Example
+      function fetchData() {
+          return new Promise(function(resolve, reject) {
+              setTimeout(function() {
+                  if (Math.random() < 0.5) {
+                      resolve("Data received");
+                  } else {
+                      reject(new Error("Failed to fetch data"));
+                  }
+              }, 2000);
+          });
+      }
+      
+      fetchData().then(function(data) {
+          console.log(data);
+      }).catch(function(err) {
+          console.error(err);
+      });
+     ```
+     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/478e4993-988d-4626-b70d-4bd4c84be870) <br />
+     Promises provide a cleaner syntax for error handling using the catch() method, which can centralize error handling for multiple asynchronous operations.
+     
+  3. Ease of usage
+     ```
+      // Callback Example
+      function fetchData(callback) {
+          setTimeout(function() {
+              callback("Data received");
+          }, 2000);
+      }
+      
+      fetchData(function(data) {
+          processData(data, function(result) {
+              displayResult(result, function() {
+                  console.log("Result displayed");
+              });
+          });
+      });
+     ```
+     ```
+      // Promise Example
+      function fetchData() {
+          return new Promise(function(resolve) {
+              setTimeout(function() {
+                  resolve("Data received");
+              }, 2000);
+          });
+      }
+      
+      fetchData().then(function(data) {
+          return processData(data);
+      }).then(function(result) {
+          return displayResult(result);
+      }).then(function() {
+          console.log("Result displayed");
+      });
+     ```
+     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/318e3be1-1760-4a42-97de-6bfb7cc46558) <br />
+     Promises simplify the chaining of asynchronous operations and eliminate the problem of "callback hell" (deeply nested callbacks), making the code easier to understand and maintain. <br />
+     Callbacks are more straightforward and suitable for simple asynchronous tasks, Promises offer improved readability, error handling, and ease of use for more complex asynchronous workflows. However, it's important to note that with the introduction of async/await in modern JavaScript, Promises have become even more convenient and powerful for handling asynchronous code.
+
+## Async Await
+  - Introduced in ES2017
+  - Allows people to write async code as if it were synchronous
