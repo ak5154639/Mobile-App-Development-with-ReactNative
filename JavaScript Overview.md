@@ -346,7 +346,7 @@ obj = {};
               </pre>
             </td>
             <td>![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/7352f5f6-5f2c-4e53-a73d-317d332dec95)</td>
-            <td>property or attribute of const object can be modified but entire object can't be modified, const object means that can point to the same object and particular object attributes can be modified and You can notice that we didn't get output for `console.log(obj)` because of javascript's asynchronoius behavior</td>
+            <td>property or attribute of const object can be modified but entire object can't be modified, const object means that can point to the same object and particular object attributes can be modified</td>
           </tr>
           <tr>
             <td>
