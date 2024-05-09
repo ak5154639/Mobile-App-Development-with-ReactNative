@@ -75,3 +75,59 @@
     ```
     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/5edd0b8d-81ba-402b-800f-747c43fb2c01) <br />
     In above example predefined class `Set` is Extended to MySet and `super()` are used to invoke methods of parent class.
+
+## React
+  - Allows us to write declarative views that "react" to changes in data
+  - Allows us to abstract complex problems into smaller components
+  - Allows us to write simple code that is still performant
+
+## Imperative vs Declarative
+  - How vs What
+  - Imperative programming outlines a series of steps to get to what we want
+  - Declarative programming just declares what we want
+    Let's try to understand Imperative and Declarative usign Example of Guitar<br />
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/48c41902-6246-4986-8cbe-42da6bea3cfd) <br />
+    ##### Pseudocode for Imperative Programming for the given example Guitar
+    ```
+      // Pseudocode
+      const strings = ['E', 'A', 'D', 'G', 'B', 'E']
+      
+      function Guitar() {
+          // create head and add pegs
+          const head = createElement('head')
+          for(let i =0; i<6; i++){
+              const peg = createElement('peg')
+              head.append(peg)
+          }
+      
+      
+          // create neck and add frets
+          const neck = createElement('neck')
+          for (let i = 0; i<19; i++){
+              const fret = createElement('fret')
+              neck.append(fret)
+          }
+      
+          // create body and strings
+          const body = createElement('body')
+          strings.forEach(tone=>{
+              const string = createElement('string')
+              string.tune(tone)
+              body.append(string)
+          })
+      
+          return body
+      }
+    ```
+    ##### Psudocode for declarative Programming for the same fiven example of Guitar
+    ```
+      const strings = ['E', 'A', 'D', 'G', 'B', 'E']
+      
+      function Guitar(){
+          return (
+              <Guitar>
+                  {strings.map(note=><String note={note}></String>)}
+              </Guitar>
+          )
+      }
+    ```
