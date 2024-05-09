@@ -1,4 +1,4 @@
-![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/89930819-ade2-4d89-afad-e609339885ff)# ES6 JavaScript
+# ES6 JavaScript
 ## ES5, ES6, ES2016, ES2017, ES.Next
   - ECMAScript vs JavaScript
     ECMAScript is basically the spec for this language ECMAScript defines the syntax, semantics, and behavior of the JavaScript language. <br/>
