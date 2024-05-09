@@ -101,6 +101,7 @@
     ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/720e524e-cd5c-4a33-94ad-2842d446fe1f)
 
     - Here `functionArray[0]()` and `function[1]()` both will give different outputs as that functions inside `makeArrayFunction()` was immediately invoked.
+      <br /><br />
     - Another application of IIFE
       ```
       const counter = (function(){
@@ -123,3 +124,57 @@
       ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/b4aafd8f-c528-424b-82b6-785aef2c36d2)
 
 ## First-Class Functions
+  - Functions are treated the same way as any other value
+    - Can be assigned to variables, array values, object values
+    - Can be passed as arguement to other functions
+    - Can be returned from functions
+  - Allows for the creation of higher-order functions
+    - Either takes one or more functions as arguements or returns a function
+    - map(), filter(), reduce()
+      ```
+      const x = [0,1,2,3];
+      
+      function addOne(number) {
+          return number + 1;
+      }
+      function sum(x, y){
+          return x+y;
+      }
+      function sumThree(x,y,z){
+          return x+y+z;
+      }
+      console.log("X: ",x);
+      console.log("x.map(addOne): ",x.map(addOne));
+      console.log("filtering X where element>1: ",x.filter(num=>num>1))
+      console.log("reducing x using sum method which takes two arguement and make it one: ",x.reduce(sum));
+      ```
+    - `map()` maps the function to every element of array
+    - `filter()` filters the elements which holds true
+    - `reduce()` reduces by taking two elements and making it one and iteration it till it becomes single
+    - Arguements of `reduce()` are in the form `reduce(callbackfn: (previousValue: number, currentValue: number, currentIndex: number, array: number[]) => number)`
+    - We can also define high order functions
+      ```
+      // HigheOrderFinctions
+      function map(arr, fn){
+          const newArr = []
+          arr.forEach(element => {
+              newArr.push(fn(element));
+          });
+          return newArr;
+      }
+      function addOne(number){
+          return number + 1;
+      }
+      
+      const x = [0,1,2,3];
+      
+      console.log(map(x, addOne));
+      ```
+      ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/1004a92e-3bcc-40bc-897c-a509689d640b)
+
+
+## Synchromous? Async? Single-Threaded?
+  - JavaScript is a single-threaded, synchronous language
+  - A function that takes a long time to run will cause a page to become unresponsive
+  - JavaScript has functions that act asynchronously
+  - But how can it be both synchronous and asynchronous?
