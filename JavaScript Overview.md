@@ -306,20 +306,106 @@ So, while `null` is not an object in the usual sense (it's a primitive value rep
   - Variable lifetime
     - Lexical Scoping (`var`): from when they're declared until when their function ends
     - Block Scoping (`const`, `let`): until the next `}` is reached
-      | Code | Output | Explanation |
-      |------|--------|-------------|
-      | `const thisIsConst = 50;\thisIsConst++   //Error` | ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/75f20c85-b603-40e6-ac12-5a72f38031a3) | Values of const varibles can't be changes |
-      | `let thisIsLet = 50;\thisIsLet = 51;\let thisIsLet = 10;` | ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/65235565-0421-4fac-a0b9-70a28d42bf89) | We can not redeclare the same variable in same scope |
-      | `const obj = {};\obj.a = 51;\console.log(obj);\obj = {};` | ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/7352f5f6-5f2c-4e53-a73d-317d332dec95) | property or attribute of const object can be modified but entire object can't be modified, const object means that can point to the same object and particular object attributes can be modified and You can notice that we didn't get output for `console.log(obj)` because of javascript's asynchronoius behavior |
-      | `console.log(thisIsConst);\const thisIsConst = 50;` | ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/0a19ea6e-3934-4459-acbf-2929dc93f09e) | As `const` is block scope and can not be accessed before defining |
-      | `console.log(thisIsLet);\let thisIsLet = 50;` | ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/3059dc02-79c3-4c74-b59a-810ad5afa11a) | For the same reason as `const` as bothe `let` and `const` are block scoped |
-      | `var thisIsVar = 50;\thisIsVar++;\var thisIsVar = "shadowed value";\console.log(thisIsVar);` | ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/b564f512-588f-4753-b0a3-d3e9abdbc8d3) | `var` can be overshadowed and redclared with same name |
-      | `console.log(thisIsVar);\var thisIsVar = 50;` | `undefined` | vars are hoisted to the top of file |
-      | `thisIsAlsoAVBriable` |  | variables without `var`, `let`, `const` can also be declared in JS as **global** variables |
+      <table>
+        <thead>
+          <tr>
+          <td>Code</td>
+          <td>Output</td>
+          <td>Explaination</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <pre>
+const thisIsConst = 50;
+thisIsConst++   //Error
+              </pre>
+            </td>
+            <td>![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/75f20c85-b603-40e6-ac12-5a72f38031a3)</td>
+            <td>Values of const varibles can't be changes</td>
+          </tr>
+          <tr>
+            <td>
+              <pre>
+let thisIsLet = 50;
+thisIsLet = 51;
+let thisIsLet = 10;              
+              </pre>
+            </td>
+            <td>![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/65235565-0421-4fac-a0b9-70a28d42bf89)</td>
+            <td>We can not redeclare the same variable in same scope</td>
+          </tr>
+          <tr>
+            <td>
+              <pre>
+const obj = {};
+obj.a = 51;
+console.log(obj);
+obj = {};
+              </pre>
+            </td>
+            <td>![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/7352f5f6-5f2c-4e53-a73d-317d332dec95)</td>
+            <td>property or attribute of const object can be modified but entire object can't be modified, const object means that can point to the same object and particular object attributes can be modified and You can notice that we didn't get output for `console.log(obj)` because of javascript's asynchronoius behavior</td>
+          </tr>
+          <tr>
+            <td>
+              <pre>
+console.log(thisIsConst);
+const thisIsConst = 50;
+              </pre>
+            </td>
+            <td>![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/0a19ea6e-3934-4459-acbf-2929dc93f09e)</td>
+            <td>As `const` is block scope and can not be accessed before defining</td>
+          </tr>
+          <tr>
+            <td>
+              <pre>
+console.log(thisIsLet);
+let thisIsLet = 50;
+              </pre>
+            </td>
+            <td>![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/3059dc02-79c3-4c74-b59a-810ad5afa11a)</td>
+            <td>For the same reason as `const` as bothe `let` and `const` are block scoped</td>
+          </tr>
+          <tr>
+            <td>
+              <pre>
+var thisIsVar = 50;
+thisIsVar++;
+var thisIsVar = "shadowed value";
+console.log(thisIsVar);
+              </pre>
+            </td>
+            <td>![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/b564f512-588f-4753-b0a3-d3e9abdbc8d3)</td>
+            <td>`var` can be overshadowed and redclared with same name</td>
+          </tr>
+          <tr>
+            <td>
+              <pre>
+console.log(thisIsVar);
+var thisIsVar = 50;
+              </pre>
+            </td>
+            <td>`undefined`</td>
+            <td>vars are hoisted to the top of file</td>
+          </tr>
+          <tr>
+            <td>
+              <pre>
+thisIsAlsoAVBriable;
+              </pre>
+            </td>
+            <td></td>
+            <td>variables without `var`, `let`, `const` can also be declared in JS as **global** variables</td>
+          </tr>
+        </tbody>
+      </table>
+      
 
-  - Hoisting
-    The behavior whereby a function definition declared at any point/line of file available to use at the top of a file too.
-    - Function definitions are hoisted, nut not lexically-scoped initializations
+  #### Hoisting
+  The behavior whereby a function definition declared at any point/line of file available to use at the top of a file too.
+  - Function definitions are hoisted, nut not lexically-scoped initializations
       ```
       thisIsHoisted();
       
@@ -360,15 +446,15 @@ So, while `null` is not an object in the usual sense (it's a primitive value rep
    
 ## The Global Object
   - All variables and functions are actually parameters and methods on the global object
-    + Browser global object is the `window` object
+    + Browser global object is the `window` object <br/>
       ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/73280f11-84de-4108-b148-45f0a3ae08fe)
-      <br/>After executing these lines
+      <br/>After executing these lines<br/>
       ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/bad678b5-0e29-4f9b-aa7d-80723afd1777)
-      <br/> after scrolling down we can see
+      <br/> after scrolling down we can see</br>
       ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/e5a3ecba-bd61-4fc5-aa37-41519b89730a)
       
-    + Node.js Global object is the `global` object
-      ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/c5f85573-aab0-4454-82dd-ec6911f5e47b)
+    + Node.js Global object is the `global` object <br/>
+      ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/c5f85573-aab0-4454-82dd-ec6911f5e47b) <br/>
       ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/3022b479-1c7d-4c40-8459-427e55a2f34a)
 
 
