@@ -351,8 +351,82 @@
     Above code will result the count to be 2 after clicking.
 
 
-       
+  #### React Todo App which will shown todos with check and uncheck and delete function at top it will show count no of todos and unchecked todos:
+  Here we have used props, states, Components(function and class) etc.
+  ```
+    import "./styles.css";
+    import React from "react";
+    
+    let id = 0;
+    
+    const Todo = (props) => (
+      <li>
+        <input
+          type="checkbox"
+          checked={props.todo.checked}
+          onChange={props.onToggle}
+        />
+        <button onClick={props.onDelete}>Delete</button>
+        <span>{props.todo.text}</span>
+      </li>
+    );
+    
+    export default class App extends React.Component {
+      constructor() {
+        super();
+        this.state = {
+          todos: [],
+        };
+      }
+      addTodo() {
+        const text = prompt("Add Todo text");
+        this.setState({
+          todos: [...this.state.todos, { id: id++, text: text, checked: false }],
+        });
+      }
+    
+      toggleTodo(id) {
+        this.setState({
+          todos: this.state.todos.map((todo) => {
+            if (todo.id === id) {
+              return { id: todo.id, text: todo.text, checked: !todo.checked };
+            }
+            return todo;
+          }),
+        });
+      }
+    
+      removeTodo(id) {
+        this.setState({
+          todos: this.state.todos.filter((todo) => todo.id != id),
+        });
+      }
+      render() {
+        return (
+          <div className="App">
+            <div>Todos Count: {this.state.todos.length}</div>
+            <div>
+              Unchecked Todos Count:{" "}
+              {this.state.todos.filter((todo) => !todo.checked).length}
+            </div>
+            <button onClick={() => this.addTodo()}>Add Todo</button>
+            <ul>
+              {this.state.todos.map((todo) => (
+                <Todo
+                  onToggle={() => this.toggleTodo(todo.id)}
+                  onDelete={() => this.removeTodo(todo.id)}
+                  todo={todo}
+                />
+              ))}
+            </ul>
+          </div>
+        );
+      }
+    }
 
+  ```
+  - `<Todo/>` component will return list item with checkbox, button and todo text having props object with functions and data
+  - Class `App` has functions `addTodo()`, `removeTodo()` and `toggleTofo()` and renderd `div` containing two other `divs` showing todo counts, button to add new todo whick will call `addTodo()` on click and unordered list having Todos mapped and each todo is passed as props to `<Todo/>` and functions to toggle and delete too.
 
 
 > But why limit React to just web?
