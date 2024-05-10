@@ -311,6 +311,49 @@
     - `setState()` calls are batched and run asynchronously
     - Pass an object to be merged, or a function of previos state
   - Changes in state also cause re-renders
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/de0f04c4-593d-43bb-b6d7-0c1070e463f0) <br/>
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/bd1631fb-f3d9-4eab-ada9-6ada7e9a439e) <br/>
+    In above two screenshots we can see there is bug at `this.setState({count: this.state.count + 1});` as `this` is not bounded so it is undefined at the time of execution. <br/>
+    We can remove this bug by two methods
+    1. Using `bind()` method:
+       ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/f35d58cc-c0cb-4dc8-a380-f5f41aec4f8e)
+    2. Using Arrow notation:
+       ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/e1e5bfe3-1463-43aa-9f9d-2d0a9d43b541) <br/>
+       In above Example `this` will bind to the class where `render` method is.
+    3. We can define it in constructor too
+  - What if we want to increase two at a time? We will try to modifying `increaseCount` function to setState twice
+    ```
+      increaseCount() {
+          this.setState({ count: this.state.count + 1 });
+          this.setState({ count: this.state.count + 1 });
+        }
+    ```
+    We will see it is resulting the count to increase one at a time not two<br/>
+    This is because `setState` calls are batched and run asynchronously.
+    Let's see consoling the value What we get
+    ```
+      increaseCount() {
+          this.setState({ count: this.state.count + 1 });
+          this.setState({ count: this.state.count + 1 });
+          console.log(this.state.count);
+        }
+    ```
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/ab48d821-da09-4e21-9cf5-23a4f63b23c3) <br/>
+    On clicking once `console.log()` returned 0 i.e. previous value as `setState()` was batched. and bothe `setState()` added value to 0.
+    > What if we want to make it 2 not 1 in first click so we can use arrow notation to make this change happen using previuos state and it will return the an object.
+    ```
+      increaseCount() {
+          this.setState((prevState) => ({ count: prevState.count + 1 }));
+          this.setState((prevState) => ({ count: prevState.count + 1 }));
+          console.log(this.state.count);
+        }
+    ```
+    Above code will result the count to be 2 after clicking.
+
+
+       
+
+
 
 > But why limit React to just web?
 
