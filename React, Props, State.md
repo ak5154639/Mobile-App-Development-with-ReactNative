@@ -196,6 +196,77 @@
     - Consistency
     - Iteration speed
   - React's declarative nature makes it easy to customize components
+    ```
+      <div>
+          <div>
+              <h1>React</h1>
+              <ul>
+                  <li>
+                      Allows us to write declarative views that “react” to changes in data
+                  </li>
+                  <li>
+                      Allows us to abstract complex problems into smaller components
+                  </li>
+                  <li>
+                      Allows us to write simple code that is still performant
+                  </li>
+              </ul>
+          </div>
+          <div>
+              <h1>React is Declarative</h1>
+              <ul>
+                  <li>
+                      Imperative vs Declarative
+                  </li>
+                  <li>
+                      The browser APIs aren’t fun to work with
+                  </li>
+                  <li>
+                      React allows us to write what we want, and the library will take care of the DOM manipulation
+                  </li>
+              </ul>
+          </div>
+      </div>
+    ```
+    In above HTML code we can see code is repeated and if we want to change the style of list items or structure in some other way then we have to change at every place
+    This can be eased with componetizing
+    ```
+      const slides = [
+          {
+              title: "React",
+              bullets: [
+                  "Allows us to write declarative views that “react” to changes in data",
+                  "Allows us to abstract complex problems into smaller components",
+                  "Allows us to write simple code that is still performant"
+              ]
+          },
+          {
+              title: "React is Declarative",
+              bullets: [
+                  "Imperative vs Declarative",
+                  "The browser APIs aren’t fun to work with",
+                  "React allows us to write what we want, and the library will take care of the DOM manipulation"
+              ]
+          }
+      ]
+      
+      const slideShow = (
+          <div>
+              {slides.map(slide=><Slide slide={slide}/>)}
+          </div>
+      )
+      
+      const Slide = slide => (
+          <div>
+              <h1>{slide.title}</h1>
+              <ul>
+                  {slide.bullets.map(bullet=><li>{bullet}</li>)}
+              </ul>
+          </div>
+      )
+      
+    ```
+    In above code we have components Slide which will be iterated 2 time as slide have two slides but if there is more slid then we'll just add slide title and bullets to the array of slide and nothing else while in HTML we will have to write another div and all the stuffs.
 
 ## React is Performant
   - We write what we want and React will do the hard work
