@@ -283,11 +283,25 @@
   - Components are just functions
     - Returns a node(something React can render, e.g. a <div />)
     - Receives an object of the properties that are passes to the element
+      ```
+        const Slide = slide => (
+            <div>
+                <h1>{slide.title}</h1>
+                <ul>
+                    {slide.bullets.map(bullet=><li>{bullet}</li>)}
+                </ul>
+            </div>
+        )
+      ```
+      `Slide` is a component i.e. function that returns a node `<div>` and receives an object `slide`.
 
 ## Props
   - Passes as an object to a component and used to compute ther returned node
   - Changes in these props will cause a recomputation of the returned node ("render")
   - Unlike in HTML, these can be an JS value
+    ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative-Notes/assets/60311459/4b31db42-952e-4b67-b1aa-ac1252427eac) <br/>
+    In above exapmle we can see `count` is passed to component as props
+
 
 ## State
   - Adds internally-manages configuration for a component
