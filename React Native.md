@@ -47,10 +47,8 @@
             }
         }
       ```
-      <video autoplay loop muted width="500">
-        <source src="https://raw.githubusercontent.com/ak5154639/Mobile-App-Development-with-ReactNative/main/assets/blockJSDemo.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      ![blockJSDemo](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative/assets/60311459/42e22a21-ed8b-4880-9756-74a15905fb13)
+
 
 
 
