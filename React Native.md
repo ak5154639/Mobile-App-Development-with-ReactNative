@@ -47,6 +47,11 @@
             }
         }
       ```
+      <video autoplay loop muted width="500">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
 
 
 ## Differences between React Native and Web
