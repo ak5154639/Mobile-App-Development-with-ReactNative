@@ -48,7 +48,7 @@
         }
       ```
       <video autoplay loop muted width="500">
-        <source src="video.mp4" type="video/mp4">
+        <source src="https://raw.githubusercontent.com/ak5154639/Mobile-App-Development-with-ReactNative/main/assets/blockJSDemo.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
 
