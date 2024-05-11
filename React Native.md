@@ -4,6 +4,29 @@
     - "Learn once, write anywhere"
   - Supports iOS and Android
 
+## Setting up Development Environment
+  - Download Android `Node.js`, `jdk` and `npm` latest versions or simply install using `choco`:
+    ```
+      choco install -y nodejs-lts microsoft-openjdk17
+    ```
+  - Then download Andorid Studio this will setup everything for you otherwise it is very complex to configure manually you can read react native decumentaion.
+  - Start `react-native` app by writting below command:
+    ```
+      npx react-native@latest init AwesomeProject
+    ```
+  - Run application using
+  1. Target is Android Device:
+    ```
+      npx react-native run-android
+    ```
+  2. Target is iOS:
+    ```
+      npx react-native run-ios
+    ```
+  - If you are getting error and you app didn't run yet just run command below it will check errors and after thet pressing `f` will automatically try to fix error
+    ```
+      npx react-native run-android
+    ```
 ## How does React Native work?
   - JavaScript is bundled
     - Transpiled and minified
