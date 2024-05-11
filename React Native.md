@@ -47,7 +47,8 @@
             }
         }
       ```
-      ![blockJSDemo](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative/assets/60311459/42e22a21-ed8b-4880-9756-74a15905fb13)
+      ![blockJSDemo](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative/assets/60311459/42e22a21-ed8b-4880-9756-74a15905fb13) <br/>
+      In above screen recording we can see that I clicked `bolck JS` button and my JS was blocked for that time but my UI was still responsive.
 
 
 
