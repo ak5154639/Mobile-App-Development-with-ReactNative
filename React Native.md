@@ -16,17 +16,21 @@
     ```
   - Run application using
   1. Target is Android Device:
-    ```
-      npx react-native run-android
-    ```
+      ```
+        npx react-native run-android
+      ```
   2. Target is iOS:
-    ```
-      npx react-native run-ios
-    ```
+      ```
+        npx react-native run-ios
+      ```
   - If you are getting error and you app didn't run yet just run command below it will check errors and after thet pressing `f` will automatically try to fix error
     ```
       npx react-native run-android
     ```
+    Then start Editing `App.js` or `App.tsx` to see magic.
+    > You can read [react-native documentation](https://reactnative.dev/docs/environment-setup?guide=native) for setting up development server base on your working OS and Target OS. <br/>
+
+    
 ## How does React Native work?
   - JavaScript is bundled
     - Transpiled and minified
@@ -104,3 +108,62 @@
   - `StyleSheet.create()`
     - Functionally the same as creating objects for style
     - Additional optimization: only send IDs over the bridge
+
+## Event Handling
+  - Unlike web, not every component has every interaction
+  - Only a few "touchable" components
+    - Button
+    - TouchableOpacity, TouchableHighlight, TouchableWithoutFeedback
+    - TouchableNativeFeedback (Android only)
+  - Web handlers will receive the event as an arguement, but React Native handlers often receive different arguements
+    - Read the docs
+
+## Components
+  - Returns a node (something that can be rendered)
+  - Represent a discrete piece of the UI
+  - "All React components must act like pure functions with respect to their props."
+  - Two type:
+    - Stateless Functional Component (SFC) a.k.a. Pure Functional Component
+    - React.Component
+
+## Stateless Functional Component (SFC)
+  - Simplest component: use when you don't need state
+  - A function that takes props and returns a node
+    - Should be "pure" (it hsould not have any side effects like setting values, updating arrays, etc.)
+  - Any change in props will cause the function to be re-invoked
+
+## React.Component
+  - An abstract class thet can be extended to behave however you want
+  - These have additional features that SFCs don't
+    - Have instances
+    - Maintain their own state
+    - Have lifecycle methods (similar to hooks or event handlers) that are automatically invoked
+  - Rendering now becomes a function of props and class properties
+
+## Component Lifecycle
+  ![image](https://github.com/ak5154639/Mobile-App-Development-with-ReactNative/assets/60311459/af0f84d7-a8cc-4f2c-8013-9c3dce2aa740)
+### Mount
+  - `constructor(props)`
+    - Initialize state or other class properties (bound methods, etc.)
+  - `render()`
+    - The meat of a component
+    - Returns a node
+  - `componentDidMount()`
+    - Do anything that isn't needed for UI (async actions, timers, etc.)
+    - Setting state here will cause a re-render before updating the UI
+### Update
+  - `componentWillReceiveProps(nextProps)`
+    - Update any state fields that rely on props
+  - `shouldComponentUpdate(nextProps, nextState)`
+    - Compare changes values, return true if the component should re-render
+      - If returned false, the update cycle terminates
+    - Almost always a premature optimization
+  - `render()`
+  - `componentDidUpdate(prevProps, prevState)`
+    - Do anything that isn't needed for UI (network requests, etc.)
+### Unmount
+  - `componentWillUnmount()`
+    - Clean up
+      - Remove event listeners
+      - Invalidate network requests
+      - Clear timeout/intervals
