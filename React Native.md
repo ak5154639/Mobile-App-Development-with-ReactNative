@@ -151,6 +151,58 @@
   - `componentDidMount()`
     - Do anything that isn't needed for UI (async actions, timers, etc.)
     - Setting state here will cause a re-render before updating the UI
+      ```
+      class App extends Component {
+        constructor(){
+          super();
+          this.state = {count: 0};
+        }
+        inc(){
+          this.setState(prevState=>({
+              count: prevState.count + 1
+          }));
+        }
+        start(){
+          setInterval(()=>this.inc(),1000);
+        }
+      
+      
+        render(){
+          return (
+            <View style={styles.container}>
+              <Text style={styles.text}>{this.state.count}</Text>
+              <Button title="Start Counter" onPress={()=>this.start()} />
+            </View>
+          );
+        }
+      }
+      ```
+      In above code we will have to add a button to UI which will execute `inc` periodically what if we want execute it automatically after rendering or mounting then we can use the function `componentDidMount()` anything inside this function will be automatically called after mounting then we can use `setInterval` to get function `inc` executed peroidically.
+      ```
+      class App extends Component {
+        constructor(){
+          super();
+          this.state = {count: 0};
+        }
+        inc(){
+          this.setState(prevState=>({
+              count: prevState.count + 1
+          }));
+        }
+        componentDidMount(){
+          setInterval(()=>this.inc(),1000);
+        }
+      
+      
+        render(){
+          return (
+            <View style={styles.container}>
+              <Text style={styles.text}>{this.state.count}</Text>
+            </View>
+          );
+        }
+      }
+      ```
 ### Update
   - `componentWillReceiveProps(nextProps)`
     - Update any state fields that rely on props
